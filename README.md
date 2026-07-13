@@ -9,6 +9,33 @@ fighting procrastination. Cozy, candy-pastel, mobile-first.
 
 ---
 
+## 🚀 Continue on another machine
+
+```bash
+git clone https://github.com/AliKastan/mochiverse.git
+cd mochiverse
+nvm use 24        # ⚠️ REQUIRED: Node 24+ (Vite 8 breaks on Node 20.x — silent build fail)
+npm install
+npm run dev       # http://localhost:5173
+```
+
+- **Build:** `npm run build` → `dist/` (also runs `tsc`).
+- **Node version is not optional** — on Node 20.x the build fails with a `styleText`
+  error and produces a *stale* `dist`, which looks like "my changes don't work". Use 24+.
+- **UI text:** [`src/game/copy.ts`](src/game/copy.ts) (Turkish) + [`src/i18n.ts`](src/i18n.ts) (English base + other locales).
+
+### Shipping to the App Store (native + payments)
+This is a web app that gets wrapped with **Capacitor** for iOS. What's left (needs a
+Mac + Xcode + Apple Developer account) is documented in **[`FOCUS_NATIVE.md`](FOCUS_NATIVE.md)**:
+- Wrap with Capacitor, add the iOS project.
+- Wire **RevenueCat** IAP — fill the `TODO(IAP)` blocks in [`src/billing.ts`](src/billing.ts).
+  Products: `mochiverse_premium_monthly` ($5/mo sub), `mochiverse_revive` ($2),
+  coin packs `mochiverse_coins_{100,550,1500,4000}`.
+- Native-only features (app blocking, lock-screen live timer) — see `FOCUS_NATIVE.md`.
+- Still needed before submit: Privacy Policy + Terms links, app icon, screenshots.
+
+---
+
 ## ✨ Features
 
 - **Strict Tamagotchi survival** — hunger, mood & health decay in **real time, even
